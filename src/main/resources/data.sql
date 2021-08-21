@@ -7,9 +7,9 @@ alter table task add constraint fk_task__project foreign key (project_id) refere
 alter table project add constraint fk_project__project_manager foreign key (project_manager_id) references user;
 
 insert into user (id, name, surname, email, username, password, role) values
-                                         (1, 'Rafal', 'Wiktorski', 'r.wiktorski@manhattan.com', 'r.wiktorski', 'test', 'ADMINISTRATOR'),
-                                         (2, 'Robert', 'Oppenheimer', 'r.oppenheimer@manhattan.com', 'r.oppenheimer', 'kaboom', 'PROJECT_MANAGER'),
-                                         (3, 'Hans', 'Bethe', 'h.bethe@manhattan.com', 'h.bethe', 'science', 'DEVELOPER');
+                                         (1, 'Rafal', 'Wiktorski', 'r.wiktorski@manhattan.com', 'r.wiktorski', '$2a$10$kyH096o91Gax3NNch3j2r.SwxrLBXPuX3X258w7fDFo9x9NF.Z7Fq', 'ADMINISTRATOR'),
+                                         (2, 'Robert', 'Oppenheimer', 'r.oppenheimer@manhattan.com', 'r.oppenheimer', '$2a$10$zDBCDR189.3iMp4sttUqe.cjM.K3PkF/vnbljhPvtc.5dX5rXJIny', 'PROJECT_MANAGER'),
+                                         (3, 'Hans', 'Bethe', 'h.bethe@manhattan.com', 'h.bethe', '$2a$10$E70U3DkjCa.8ldvWcmcM9.LwWKRC7XITPQjlJtaNRhV3a44VCaEuu', 'DEVELOPER');
 
 insert into project (id, code, name, project_manager_id) values
 (1, 'MHTN', 'Manhattan Project', 2),
