@@ -1,6 +1,6 @@
 package com.elk.configuration.security;
 
-import com.elk.domain.model.enums.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,16 +12,43 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final DefaultAuthenticationSuccessHandler successHandler;
+    private final DefaultAuthenticationFailureHandler failureHandler;
+
+    @Autowired
+    public SecurityConfiguration(DefaultAuthenticationSuccessHandler successHandler,
+                                 DefaultAuthenticationFailureHandler failureHandler) {
+        this.successHandler = successHandler;
+        this.failureHandler = failureHandler;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-               // .loginPage("/login")
-                //.loginProcessingUrl("/api/login")
-                .successForwardUrl("/project/1")
+        http
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/api/login")
+                .successHandler(successHandler)
+                .failureHandler(failureHandler)
                 .permitAll().and()
         .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .anyRequest().hasAnyRole(Role.ADMINISTRATOR.name(), Role.PROJECT_MANAGER.name(), Role.DEVELOPER.name()).and()
+                .antMatchers("/login**").permitAll()
+                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/vendor**").permitAll()
+                .antMatchers("/common**").permitAll()
+                .antMatchers("/inline**").permitAll()
+                .antMatchers("/polyfills**").permitAll()
+                .antMatchers("/styles**").permitAll()
+                .antMatchers("/runtime**").permitAll()
+                .antMatchers("/main**").permitAll()
+                .antMatchers("/*.woff2").permitAll()
+                .antMatchers("/*.ttf").permitAll()
+                .antMatchers("/*.woff").permitAll()
+                .antMatchers("/*.svg").permitAll()
+                .antMatchers("/*.eot").permitAll()
+                .anyRequest().authenticated().and()//hasAnyRole(Role.ADMINISTRATOR.name(), Role.PROJECT_MANAGER.name(), Role.DEVELOPER.name()).and()
         .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }

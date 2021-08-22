@@ -3,15 +3,15 @@ package com.elk.domain.project.controller;
 import com.elk.common.controller.EntityNotFoundException;
 import com.elk.domain.model.Project;
 import com.elk.domain.project.service.ProjectDto;
+import com.elk.domain.project.service.ProjectHeadingDto;
 import com.elk.domain.project.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("api/project")
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -21,11 +21,19 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ProjectDto getProject(@PathVariable Long id) {
         return projectService.getProject(id)
                 .orElseThrow(() -> new EntityNotFoundException(Project.class, id));
     }
 
-   // public List<ProjectDto>
+    @GetMapping("all")
+    public List<ProjectHeadingDto> getAllProjects() {
+        return projectService.getAllProjects();
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void delete(@PathVariable Long id) {
+        projectService.delete(id);
+    }
 }

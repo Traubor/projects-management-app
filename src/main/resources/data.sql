@@ -13,7 +13,14 @@ insert into user (id, name, surname, email, username, password, role) values
 
 insert into project (id, code, name, project_manager_id) values
 (1, 'MHTN', 'Manhattan Project', 2),
-(2, 'X', 'Project X', 2);
+(2, 'A', 'Project A', 2),
+(3, 'B', 'Project B', 2),
+(4, 'C', 'Project C', 2),
+(5, 'D', 'Project D', 2),
+(6, 'E', 'Project E', 2),
+(7, 'F', 'Project F', 2),
+(8, 'G', 'Project G', 2),
+(9, 'X', 'Project X', 2);
 
 insert into task (id, project_id, description, progress, status, deadline) values
 (1, 1, 'Construct atomic bomb', 25.6, 'IN_PROGRESS', '1945-01-01'),

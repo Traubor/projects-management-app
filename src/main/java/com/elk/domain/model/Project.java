@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Project {
+public class Project implements Comparable<Project> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,4 +37,10 @@ public class Project {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private Set<Task> tasks = new HashSet<>(0);
+
+    @Override
+    public int compareTo(Project o) {
+        return Comparator.comparing(Project::getName)
+                .compare(this, o);
+    }
 }

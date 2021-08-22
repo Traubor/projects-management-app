@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/api/task")
 public class TaskController {
 
     private final TaskService taskService;
@@ -25,5 +27,10 @@ public class TaskController {
     public TaskDto getTask(@PathVariable Long id) {
         return taskService.getTask(id)
                 .orElseThrow(() -> new EntityNotFoundException(Task.class, id));
+    }
+
+    @GetMapping("/all")
+    public List<TaskDto> getAllTasks() {
+        return taskService.getAllTasks();
     }
 }

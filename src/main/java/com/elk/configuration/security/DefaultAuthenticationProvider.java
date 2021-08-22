@@ -1,8 +1,8 @@
 package com.elk.configuration.security;
 
 import com.elk.domain.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
+@Slf4j
 public class DefaultAuthenticationProvider implements AuthenticationProvider {
 
     private final AuthenticationService authenticationService;
@@ -29,10 +30,12 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Optional<User> user = authenticationService.authenticate(authentication.getName(), (String) authentication.getCredentials());
         if (user.isPresent()) {
+            log.info("Successful authentication");
             AuthenticatedUser authenticatedUser = new AuthenticatedUser(user.get(), getAuthorities(user.get()));
             return new UsernamePasswordAuthenticationToken(authenticatedUser, authentication.getCredentials(), authenticatedUser.getAuthorities());
         } else {
-            throw new AuthenticationCredentialsNotFoundException("Wrong credentials");
+            log.info("Wrong credentials");
+            throw new DefaultAuthenticationCredentialsNotFoundException(SecurityConstants.WRONG_CREDENTIALS);
         }
     }
 

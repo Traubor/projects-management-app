@@ -4,7 +4,9 @@ import com.elk.domain.project.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -21,8 +23,14 @@ public class ProjectService {
                 .map(ProjectDto::new);
     }
 
-    public Optional<ProjectDto> getAllProjects(Long id) {
-        return repository.findById(id)
-                .map(ProjectDto::new);
+    public List<ProjectHeadingDto> getAllProjects() {
+        return repository.findAll().stream()
+                .sorted()
+                .map(ProjectHeadingDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

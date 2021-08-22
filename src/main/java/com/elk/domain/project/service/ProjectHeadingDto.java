@@ -2,7 +2,9 @@ package com.elk.domain.project.service;
 
 import com.elk.common.utils.LabelsUtils;
 import com.elk.domain.model.Project;
+import lombok.Getter;
 
+@Getter
 public class ProjectHeadingDto {
 
     public ProjectHeadingDto(Project project) {
