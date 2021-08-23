@@ -15,6 +15,8 @@ import {ItemDeleteComponent} from "../common/item-delete.component";
 import {ItemAddComponent} from "../common/item-add.component";
 import {ProjectService} from "../project/project.service";
 import {TaskService} from "../task/task.service";
+import {UserService} from "../user/user.service";
+import {DropdownComponent} from "../common/dropdown.component";
 
 
 const routes: Routes = [
@@ -34,7 +36,8 @@ const routes: Routes = [
         ProjectComponent,
         TaskComponent,
         ItemDeleteComponent,
-        ItemAddComponent
+        ItemAddComponent,
+        DropdownComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -43,7 +46,7 @@ const routes: Routes = [
         FormsModule,
         AgGridModule.withComponents([])
     ],
-    providers: [ProjectService, TaskService],
+    providers: [ProjectService, TaskService, UserService],
     bootstrap: [HomeComponent]
 })
 export class HomeModule {

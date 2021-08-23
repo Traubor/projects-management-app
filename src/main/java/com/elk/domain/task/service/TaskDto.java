@@ -3,6 +3,7 @@ package com.elk.domain.task.service;
 import com.elk.domain.model.Task;
 import com.elk.domain.model.User;
 import com.elk.domain.model.enums.Status;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Getter
+@AllArgsConstructor
 public class TaskDto {
 
     public TaskDto(Task task) {

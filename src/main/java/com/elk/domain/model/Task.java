@@ -22,7 +22,7 @@ import java.util.Comparator;
 public class Task implements Comparable<Task> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 

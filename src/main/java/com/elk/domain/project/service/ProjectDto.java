@@ -2,6 +2,7 @@ package com.elk.domain.project.service;
 
 import com.elk.domain.model.Project;
 import com.elk.domain.task.service.TaskDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 
 
 @Getter
+@AllArgsConstructor
 public class ProjectDto {
 
     public ProjectDto(Project project) {

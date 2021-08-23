@@ -21,7 +21,7 @@ import java.util.Set;
 public class User implements Comparable<User> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 

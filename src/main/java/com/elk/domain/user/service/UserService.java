@@ -1,5 +1,8 @@
 package com.elk.domain.user.service;
 
+import com.elk.common.utils.LabelsUtils;
+import com.elk.domain.common.LabelWithId;
+import com.elk.domain.model.enums.Role;
 import com.elk.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,13 @@ public class UserService {
         return repository.findAll().stream()
                 .sorted()
                 .map(UserDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<LabelWithId> getUserLabelsWithRole(Role role) {
+        return repository.findAllByRole(role).stream()
+                .sorted()
+                .map(user -> new LabelWithId(user.getId(), LabelsUtils.userLabel(user)))
                 .collect(Collectors.toList());
     }
 }

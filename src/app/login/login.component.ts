@@ -82,7 +82,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginInProgress = true;
         this.loginService.login({username: this.username, password: this.password}).subscribe(
             result => {
-                console.log(result.code)
                 if (result.code == 'SUCCESS') {
                     this.onLoginSuccess.emit();
                     this.router.navigateByUrl('/projects')

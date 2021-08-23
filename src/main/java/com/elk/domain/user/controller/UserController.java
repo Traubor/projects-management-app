@@ -1,7 +1,9 @@
 package com.elk.domain.user.controller;
 
 import com.elk.common.controller.EntityNotFoundException;
+import com.elk.domain.common.LabelWithId;
 import com.elk.domain.model.User;
+import com.elk.domain.model.enums.Role;
 import com.elk.domain.user.service.UserDto;
 import com.elk.domain.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("api/user")
 public class UserController {
 
     private final UserService userService;
@@ -23,14 +25,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public UserDto getUser(@PathVariable Long id) {
         return userService.getUser(id)
                 .orElseThrow(() -> new EntityNotFoundException(User.class, id));
     }
 
-    @GetMapping("/all")
+    @GetMapping("all")
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("labels/{role}")
+    public List<LabelWithId> getUserLabelsWithRole(@PathVariable Role role) {
+        return userService.getUserLabelsWithRole(role);
     }
 }

@@ -1,9 +1,7 @@
 package com.elk.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.elk.domain.project.service.ProjectDto;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,10 +15,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Getter
+@ToString
 public class Project implements Comparable<Project> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 
@@ -42,5 +41,12 @@ public class Project implements Comparable<Project> {
     public int compareTo(Project o) {
         return Comparator.comparing(Project::getName)
                 .compare(this, o);
+    }
+
+    @Transient
+    public void update(ProjectDto projectDto, User projectManager) {
+        this.name = projectDto.getName();
+        this.code = projectDto.getCode();
+        this.projectManager = projectManager;
     }
 }

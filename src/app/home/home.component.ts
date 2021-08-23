@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'app-projects',
+    selector: 'home',
     template: `
         <div class="container pb-5">
             <ul class="nav nav-pills nav-fill">

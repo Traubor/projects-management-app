@@ -2,9 +2,11 @@ package com.elk.domain.user.service;
 
 import com.elk.domain.model.User;
 import com.elk.domain.model.enums.Role;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class UserDto {
 
     public UserDto(User user) {

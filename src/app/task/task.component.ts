@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TaskDto, TaskService} from "./task.service";
 
 @Component({
-    selector: 'app-projects',
+    selector: 'tasks',
     template: `
         <div>
             <ul class="list-group">

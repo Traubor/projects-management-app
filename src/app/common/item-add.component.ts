@@ -6,23 +6,22 @@ import {IHeaderAngularComp} from "ag-grid-angular";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="addButton">
-            <i class="bi bi-plus-circle" (click)="addItem()"></i>
+            <i class="bi bi-plus-circle"
+               data-bs-toggle="modal"
+               [attr.data-bs-target]="addModalName"
+            ></i>
         </div>
     `
 })
-export class ItemAddComponent implements IHeaderAngularComp  {
+export class ItemAddComponent implements IHeaderAngularComp {
 
-    private addFunction: () => void;
+    addModalName: string;
 
     agInit(params: IHeaderParams) {
-        this.addFunction =  params["addFunction"];
-    }
-
-    addItem(){
-        this.addFunction();
+        this.addModalName = "#" + params["addModalName"];
     }
 
     refresh(params: IHeaderParams): boolean {
-        return false;
+        return true;
     }
 }
