@@ -6,6 +6,7 @@ import com.elk.domain.project.service.ProjectDto;
 import com.elk.domain.project.service.ProjectHeadingDto;
 import com.elk.domain.project.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class ProjectController {
     }
 
     @PutMapping("create")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')") // this is an example how I would secure server side entry points
     public void createProject(@RequestBody ProjectDto projectDto) {
         projectService.createProject(projectDto);
     }
