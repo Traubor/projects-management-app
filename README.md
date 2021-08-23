@@ -24,7 +24,7 @@ Passwords are hashed, so I am putting list of plain text credentials below:
 
 ## Remarks
 
-Application is not finished and has many points that require additional work which I didn't manage to finish in time. These are:
+Application is not finished and has many points that require additional work which I didn't manage to finish on time. These are:
 - finishing client functionalities
 - making UI prettier
 - finishing security configuration for more granular access rights
